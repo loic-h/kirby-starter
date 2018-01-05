@@ -2,8 +2,45 @@
   "name": "lamy",
   "version": "1.0.0",
   "scripts": {
-
+    "start": "npm-run-all clean build:js build:css build:fonts build:images",
+    "watch": "npm-run-all clean watch:assets",
+    "clean": "npm-run-all clean:js clean:css clean:fonts clean:images",
+    "clean:js": "rm -rf dist/assets/js",
+    "clean:css": "rm -rf dist/assets/css",
+    "clean:fonts": "rm -rf dist/assets/fonts",
+    "clean:images": "rm -rf dist/assets/images",
+    "watch:assets": "npm-run-all -p watch:js watch:css watch:fonts watch:images",
+    "watch:js": "mkdir -p dist/assets/js/ && npm-run-all watch:babel",
+    "watch:babel": "watchify src/js/app.js -v -o dist/assets/js/app.js -d -t [babelify] -p [minifyify --map app.js.map --output dist/assets/js/app.js.map]",
+    "watch:css": "nodemon --watch src/scss -e scss --exec 'npm run build:css'",
+    "watch:images": "nodemon --watch src/images -e svg,jpg,png,jpeg,gif --exec 'npm run build:images'",
+    "watch:fonts": "nodemon --watch src/fonts -e woff,woff2 --exec 'npm run build:fonts'",
+    "build:css": "mkdir -p dist/assets/css/ && npm-run-all css:sass css:prefix",
+    "build:js": "mkdir -p dist/assets/js/ && npm-run-all babel:js",
+    "build:images": "mkdir -p dist/assets/images/ && npm-run-all optim:svg optim:images",
+    "build:fonts": "mkdir -p dist/assets/fonts/ && npm-run-all font:copy",
+    "babel:js": "browserify src/js/app.js -v -o dist/assets/js/app.js -d -t [babelify] -p [minifyify --map app.js.map --output dist/assets/js/app.js.map]",
+    "css:sass": "node-sass --include-path src/scss --include-path node_modules src/scss/app.scss dist/assets/css/app.css --source-map true",
+    "css:prefix": "postcss --use autoprefixer -o dist/assets/css/app.css dist/assets/css/app.css",
+    "optim:svg": "svgo -f src/images/ -o dist/assets/images/ --disable=cleanupIDs --disable=mergePaths --disable=convertShapeToPath --disable=transformsWithOnePath --disable=collapseGroups",
+    "optim:images": "imagemin src/images/**/*.{png,jpg,jpeg,gif} --out-dir=dist/assets/images/",
+    "font:copy": "cp -r src/fonts/. dist/assets/fonts/"
   },
   "author": "Loïc Hamet",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "autoprefixer": "^7.2.4",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browserify": "^15.0.0",
+    "imagemin-cli": "^3.0.0",
+    "minifyify": "^7.3.5",
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.14.7",
+    "npm-run-all": "^4.1.2",
+    "postcss-cli": "^4.1.1",
+    "svgo": "^1.0.3",
+    "watchify": "^3.9.0"
+  }
 }
