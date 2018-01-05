@@ -1,5 +1,5 @@
 {
-  "name": "lamy",
+  "name": "kirby-starter",
   "version": "1.0.0",
   "scripts": {
     "start": "npm-run-all clean build:js build:css build:fonts build:images",
