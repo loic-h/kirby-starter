@@ -1,0 +1,80 @@
+@mixin square($size) {
+	width: $size;
+	height: $size;
+}
+
+@mixin circle($size: null) {
+	@if $size {
+		@include square($size);
+	}
+	border-radius: 50%;
+}
+
+@mixin equilateral($size, $color, $way) {
+	@include triangle($size, $size, $color, $way)
+}
+
+@mixin triangle($height, $width, $color, $way) {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent;
+	display: block;
+
+	@if $way == "north" {
+		border-left-width: $width / 2;
+		border-right-width: $width / 2;
+		border-bottom-width: $height;
+		border-bottom-color: $color;
+	} @else if $way == "east" {
+		border-top-width: $width / 2;
+		border-bottom-width: $width / 2;
+		border-left-width: $height;
+		border-left-color: $color;
+	} @else if $way == "south" {
+		border-left-width: $width / 2;
+		border-right-width: $width / 2;
+		border-top-width: $height;
+		border-top-color: $color;
+	} @else if $way == "west" {
+		border-top-width: $width / 2;
+		border-bottom-width: $width / 2;
+		border-right-width: $height;
+		border-right-color: $color;
+	}
+}
+
+@mixin plus($size, $color: black, $thick: 1px) {
+	position: relative;
+	@include square($size);
+
+	&:before,
+	&:after {
+		content: '';
+		display: block;
+		width: $size*0.75;
+		height: 1px;
+		background: $color;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		position: absolute;
+	}
+
+	&:after {
+		transform: translate(-50%, -50%) rotate(90deg);
+	}
+
+}
+
+@mixin cross($size, $color: black, $thick: 1px) {
+	@include plus($size, $color$thick);
+
+	&:before {
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	&:after {
+		transform: translate(-50%, -50%) rotate(135deg);
+	}
+}

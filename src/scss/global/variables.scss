@@ -1,0 +1,16 @@
+$base: 1.2rem;
+
+$fontSizeGlobal: 1rem;
+$fontSizeSmall: 0.9rem;
+$fontSizeBig: $fontSizeGlobal * 1.5;
+$maxWidth: 1400px;
+
+$black: #000000;
+$white: #FFFFFF;
+$grey: #C6C6C6;
+$greyLight: #f2f2f2;
+
+$shadow: 0 1px 1px 0 rgba($black, 0.2);
+
+$easeDuration: 0.15s;
+$easeFunction: ease-out;
