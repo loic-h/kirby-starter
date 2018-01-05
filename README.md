@@ -15,7 +15,6 @@ npm start
 npm run watch
 
 # update kirby
-git submodule foreach --recursive git checkout master
-git submodule foreach --recursive git pull
+git submodule update --init --recursive
 ```
 Serve dist folder
