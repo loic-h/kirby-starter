@@ -1,0 +1,6 @@
+title: Home
+
+fields:
+  - title:
+    label: Title
+    type:  text

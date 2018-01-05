@@ -1,1 +1,48 @@
-/node_modules
+node_modules/
+
+# Assets
+# ---------------
+
+/dist/assets/*
+
+# Kirby
+# ---------------
+dist/kirby/*
+!dist/kirby/.keep
+dist/panel/*
+!dist/panel/.keep
+
+# Temporary files
+# ---------------
+
+/dist/thumbs/*
+!/dist/thumbs/index.html
+
+/dist/site/cache/*
+!/site/cache/index.html
+
+# Submodules
+# ---------------
+dist/site/plugins/field-multiselect
+
+# -------------SECURITY-------------
+# NEVER publish these files via Git!
+# -------------SECURITY-------------
+
+# Kirby accounts
+# ---------------
+
+/dist/site/accounts/*
+!/dist/site/accounts/index.html
+
+# Avatars
+# ---------------
+
+/dist/dist/assets/avatars/*
+!/dist/dist/assets/avatars/index.html
+
+# Content
+# ---------------
+
+/dist/content/*
+!/dist/content/.keep
